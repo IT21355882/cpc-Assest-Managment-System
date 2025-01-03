@@ -1,1 +1,5 @@
-
+:root {
+    --bs-primary: #df3e35; /* Set primary color to red */
+    --bs-primary-rgb: 223, 62, 53; /* RGB equivalent */
+  }
+  

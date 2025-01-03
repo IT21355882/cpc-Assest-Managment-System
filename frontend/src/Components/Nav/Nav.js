@@ -1,30 +1,62 @@
-import React from 'react';
-import './Nav.css';
-import {Link} from "react-router-dom";
+import React from "react";
+// import { Navbar, Nav, Button, Container, Image } from "react-bootstrap";
+import { Navbar, Nav, Container, Row, Col, Form, Button, Alert, Image } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from '../../assets/logo.png';
 
 
-function Nav() {
+const NavigationBar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear login state
+    localStorage.removeItem("LoginUserID");
+    localStorage.removeItem("LoginUserPosition");
+    localStorage.removeItem("IsLogin");
+
+    // Redirect to Sign-In page
+    navigate("/signin");
+  };
+
+  const isLoggedIn = localStorage.getItem("IsLogin") === "true";
+
   return (
-    <div>
-      <ul className='home-ul'>
-        <li className='home-li'>
-            <Link to = "/mainhome" className="activeHome">
-            <h1>home</h1>
-            </Link>
-        </li>
-        <li className='home-li'>
-        <Link to = "/addasset" className="activeHome">
-            <h1>Add Broken Asset</h1>
-        </Link> 
-        </li>
-        <li className='home-li'>
-        <Link to = "/details" className="activeHome">
-            <h1>Asset Details</h1>
-        </Link>
-        </li>
-      </ul>
-    </div>
+    <Navbar bg="primary" variant="light" expand="lg" sticky="top">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          <Image src={Logo} alt="Logo" fluid style={{ maxHeight: "50px" }} />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
+              Dashboard
+            </Nav.Link>
+            <Nav.Link as={Link} to="/addasset" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
+              Add Broken Asset
+            </Nav.Link>
+            <Nav.Link as={Link} to="/details" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
+              Asset Details
+            </Nav.Link>
+          </Nav>
+          {isLoggedIn ? (
+            <Button variant="outline-light" onClick={handleLogout}>
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Nav.Link as={Link} to="/signin" className="text-light">
+                Sign In
+              </Nav.Link>
+              <Nav.Link as={Link} to="/register" className="text-light">
+                Register
+              </Nav.Link>
+            </>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-}
+};
 
-export default Nav
+export default NavigationBar;
