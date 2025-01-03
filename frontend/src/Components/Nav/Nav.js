@@ -35,9 +35,11 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/addasset" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
               Add Broken Asset
             </Nav.Link>
-            <Nav.Link as={Link} to="/details" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
-              Asset Details
-            </Nav.Link>
+            {localStorage.getItem("LoginUserPosition") === "Admin" &&
+              <Nav.Link as={Link} to="/details" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
+                Asset Details
+              </Nav.Link>
+            }
           </Nav>
           {isLoggedIn ? (
             <Button variant="outline-light" onClick={handleLogout}>
