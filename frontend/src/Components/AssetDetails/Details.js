@@ -1,34 +1,38 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from '../Nav/Nav';
-import axios from "axios";
+import axios from 'axios';
 import Asset from '../Asset/Asset';
-//display
-const URL = "http://localhost:5000/asset";
+import { Container, Row, Col } from 'react-bootstrap';
+
+const URL = 'http://localhost:5000/asset';
 
 const fetchHandler = async () => {
-  return await axios.get(URL).then((res) => res.data);
-}
+  return await axios.get('http://localhost:5000/asset').then((res) => res.data);
+};
 
 function Details() {
+  const [assets, setAssets] = useState([]);
 
-  const [asset, setAsset] = useState();
-  useEffect(()=> {
-    fetchHandler().then((data) => setAsset(data.asset));
-  },[])
+  useEffect(() => {
+    fetchHandler().then((data) => setAssets(data.asset));
+  }, []);
 
   return (
-    <div>
-      <Nav/>
-      <h1>display page</h1>
-      <div>
-        {asset && asset.map((asset, i) => (
-          <div key={i}>
-            <Asset asset={asset}/>
-            </div>
-        ))}
-      </div>
-    </div>
-  )
+    <>
+      <Nav />
+      <Container className="mt-4">
+        <h1 className="text-center mb-4">Display Page</h1>
+        <Row>
+          {assets &&
+            assets.map((asset, index) => (
+              <Col key={index} md={4} sm={6} xs={12} className="mb-4">
+                <Asset asset={asset} />
+              </Col>
+            ))}
+        </Row>
+      </Container>
+    </>
+  );
 }
 
-export default Details
+export default Details;

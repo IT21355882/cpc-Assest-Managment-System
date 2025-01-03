@@ -40,12 +40,12 @@ const addAsset = async (req, res, next) => {
 
 //get by id
 const getbyId = async (req, res, next) => {
-    const id = req.params.id;
+    const epf = req.params.id;
 
     let asset;
 
     try {
-        asset = await Asset.findById(id);
+        asset = await Asset.findOne({ EPF: epf });
     }catch (err) {
         console.log(err);
     }

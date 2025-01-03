@@ -41,6 +41,10 @@ const assetSchema = new Schema({
     Error:{
         type:String,
         required:true,
+    },
+    currentStatus:{
+        type:String,
+        default: "Not fixed"
     }
 });
 
