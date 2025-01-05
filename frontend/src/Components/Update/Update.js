@@ -2,6 +2,8 @@ import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import {useNavigate} from 'react-router';
+import Footer from '../Footer';
+
 
 function Update() {
 
@@ -96,6 +98,7 @@ function Update() {
         <br></br>
         <button>Submit</button>
       </form>
+      
     </div>
   )
 }

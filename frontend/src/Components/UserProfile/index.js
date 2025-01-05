@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import NavigationBar from "../Nav/Nav";
+import Footer from "../Footer";
 
 function UserProfile() {
   const { id } = useParams(); // Get the user ID from the route params
@@ -42,7 +43,7 @@ function UserProfile() {
       <NavigationBar />
       <Container
         className="d-flex align-items-center justify-content-center"
-        style={{ height: "70vh" }}
+        style={{ height: "80vh" }}
       >
         <Row>
           <Col>
@@ -60,6 +61,7 @@ function UserProfile() {
           </Col>
         </Row>
       </Container>
+      <Footer/>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import Footer from "../Footer";
 
 function UpdateAsset() {
   const { id } = useParams(); // Get the asset ID from the URL
@@ -218,6 +219,7 @@ function UpdateAsset() {
           </Button>
         </Form>
       </Container>
+      <Footer/>
     </div>
   );
 }

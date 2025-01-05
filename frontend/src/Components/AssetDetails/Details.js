@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import axios from "axios";
 import Asset from "../Asset/Asset";
 import { Container, Row, Col, FormControl, InputGroup } from "react-bootstrap";
+import Footer from '../Footer';
 
 const fetchHandler = async () => {
   return await axios.get("http://localhost:5000/asset").then((res) => res.data);
@@ -55,6 +56,7 @@ function Details() {
           )}
         </Row>
       </Container>
+      <Footer/>
     </>
   );
 }

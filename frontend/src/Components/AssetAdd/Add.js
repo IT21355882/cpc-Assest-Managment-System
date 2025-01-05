@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import Footer from "../Footer";
 
 function Add() {
   const navigate = useNavigate();
@@ -168,6 +169,8 @@ function Add() {
           </Button>
         </Form>
       </Container>
+
+      <Footer/>
     </div>
   );
 }

@@ -3,6 +3,8 @@ import axios from "axios";
 import { Table, InputGroup, FormControl, Button } from "react-bootstrap";
 import NavigationBar from "../Nav/Nav";
 import { Link } from "react-router-dom";
+import Footer from '../Footer';
+
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -49,7 +51,7 @@ function UserList() {
   return (
     <div>
       <NavigationBar />
-      <div className="container mt-4">
+      <div className="container mt-4" style={{ minHeight: "80vh"}}>
         <h1 className="text-center mb-4">User List</h1>
 
         <Link to={`/register`} className="mx-auto mb-4 btn btn-danger">
@@ -105,6 +107,7 @@ function UserList() {
           </tbody>
         </Table>
       </div>
+      <Footer/>
     </div>
   );
 }
