@@ -67,4 +67,54 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res, next) => {
+  //get all users
+  try {
+    user = await User.find();
+  } catch (err) {
+    console.log(err);
+  }
+  //not found
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  //display
+  return res.status(200).json({ user });
+});
+
+router.delete("/deleteUser/:id", async (req, res, next) => {
+    const id = req.params.id;
+
+    let user;
+
+    try {
+        user = await User.findByIdAndDelete(id)
+    }catch (err) {
+        console.log(err);
+    }
+    if (!user) {
+        return res.status(404).json({message: "unable to delete"});
+    }
+
+    return res.status(200).json({message: "Delete Successfully"});
+}); 
+
+router.get("/:id", async (req, res, next) => {
+    const id = req.params.id;
+
+    let user;
+
+    try {
+        user = await User.findById(id);
+    }catch (err) {
+        console.log(err);
+    }
+
+    if (!user) {
+        return res.status(404).json({message: "Not found"});
+    }
+
+    return res.status(200).json({user});
+});
+
 module.exports = router;

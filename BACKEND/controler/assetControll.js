@@ -39,7 +39,7 @@ const addAsset = async (req, res, next) => {
 };
 
 //get by id
-const getbyId = async (req, res, next) => {
+const getbyEPF = async (req, res, next) => {
     const epf = req.params.id;
 
     let asset;
@@ -57,15 +57,33 @@ const getbyId = async (req, res, next) => {
     return res.status(200).json({asset});
 };
 
+const getbyId = async (req, res, next) => {
+    const id = req.params.id;
+
+    let asset;
+
+    try {
+        asset = await Asset.findById(id);
+    }catch (err) {
+        console.log(err);
+    }
+
+    if (!asset) {
+        return res.status(404).json({message: "Not found"});
+    }
+
+    return res.status(200).json({asset});
+};
+
 //update details
 const updateDetails = async (req, res, next) => {
     const id = req.params.id;
-    const {name, EPF, location, Intercom, Item, Brand, Model, SerialNumber, AssetNumber, Error} = req.body;
+    const {name, EPF, location, Intercom, Item, Brand, Model, SerialNumber, AssetNumber, Error, currentStatus} = req.body;
 
     let asset;
     try {
         asset = await Asset.findByIdAndUpdate(id,
-            {name: name, EPF:EPF, location:location, Intercom:Intercom, Item:Item, Brand:Brand, Model:Model, SerialNumber:SerialNumber, AssetNumber:AssetNumber, Error:Error});
+            {name: name, EPF:EPF, location:location, Intercom:Intercom, Item:Item, Brand:Brand, Model:Model, SerialNumber:SerialNumber, AssetNumber:AssetNumber, Error:Error, currentStatus:currentStatus});
             asset = await asset.save();
     }catch(err) {
         console.log(err);
@@ -74,7 +92,7 @@ const updateDetails = async (req, res, next) => {
         return res.status(404).json({message: "unable to update"});
     }
 
-    return res.status(200).json({asset});
+    return res.status(200).json({message: "Updated Successfully"});
 };
 
 //delete details
@@ -92,7 +110,7 @@ const deleteAsset = async (req, res, next) => {
         return res.status(404).json({message: "unable to delete"});
     }
 
-    return res.status(200).json({asset});
+    return res.status(200).json({message: "Delete Successfully"});
 }
 
 

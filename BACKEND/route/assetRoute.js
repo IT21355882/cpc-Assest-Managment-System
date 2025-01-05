@@ -8,8 +8,8 @@ const AssetController = require("../controler/assetControll");
 router.get("/",AssetController.getAllasset);
 router.post("/addAsset",AssetController.addAsset);
 router.get("/:id",AssetController.getbyId);
-router.put("/:id",AssetController.updateDetails);
-router.delete("/:id",AssetController.deleteAsset);
+router.put("/updateAsset/:id",AssetController.updateDetails);
+router.delete("/deleteAsset/:id",AssetController.deleteAsset);
 
 //export
 module.exports = router;

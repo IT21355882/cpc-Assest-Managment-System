@@ -1,9 +1,18 @@
 import React from "react";
 // import { Navbar, Nav, Button, Container, Image } from "react-bootstrap";
-import { Navbar, Nav, Container, Row, Col, Form, Button, Alert, Image } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Alert,
+  Image,
+} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from '../../assets/logo.png';
-
+import Logo from "../../assets/logo.png";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -29,22 +38,62 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
+            <Nav.Link
+              as={Link}
+              to="/"
+              style={{
+                color: "#fff",
+                fontSize: "18px",
+                textDecoration: "none",
+              }}
+            >
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/addasset" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
+            <Nav.Link
+              as={Link}
+              to="/addasset"
+              style={{
+                color: "#fff",
+                fontSize: "18px",
+                textDecoration: "none",
+              }}
+            >
               Add Broken Asset
             </Nav.Link>
-            {localStorage.getItem("LoginUserPosition") === "Admin" &&
-              <Nav.Link as={Link} to="/details" style={{color: "#fff", fontSize: "18px", textDecoration: "none" }}>
-                Asset Details
-              </Nav.Link>
-            }
+            <Nav.Link
+              as={Link}
+              to="/details"
+              style={{
+                color: "#fff",
+                fontSize: "18px",
+                textDecoration: "none",
+              }}
+            >
+              Broken Assets
+            </Nav.Link>
+            {localStorage.getItem("LoginUserPosition") === "Admin" && (
+              <Nav.Link
+              as={Link}
+              to="/userList"
+              style={{
+                color: "#fff",
+                fontSize: "18px",
+                textDecoration: "none",
+              }}
+            >
+              Users
+            </Nav.Link>
+            )}
           </Nav>
           {isLoggedIn ? (
-            <Button variant="outline-light" onClick={handleLogout}>
-              Logout
-            </Button>
+            <div>
+              <Link to={`/profile`} style={{textDecoration: 'none'}} className="btn btn-light me-4">
+                {localStorage.getItem("LoginUserID")} | {localStorage.getItem("username")}
+              </Link>
+              <Button variant="outline-light" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
           ) : (
             <>
               <Nav.Link as={Link} to="/signin" className="text-light">

@@ -40,7 +40,7 @@ const Register = () => {
       });
 
       setSuccess("Registration successful! Redirecting to login...");
-      setTimeout(() => navigate("/signin"), 2000); // Redirect to Sign-In page after 2 seconds
+      navigate("/userList"); // Redirect to Sign-In page after 2 seconds
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Registration failed!");
@@ -48,7 +48,7 @@ const Register = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 mb-5">
       <Row className="justify-content-center">
         <Col md={6} className="text-center mb-4">
           <Image src={Logo} alt="Logo" fluid style={{ maxHeight: "100px" }} />
@@ -101,10 +101,10 @@ const Register = () => {
                 required
               >
                 <option value="">Select Position</option>
-                <option value="manager">Manager</option>
-                <option value="developer">Developer</option>
-                <option value="designer">Designer</option>
-                <option value="tester">Tester</option>
+                <option value="Manager">Manager</option>
+                <option value="Operator">Operator</option>
+                <option value="General">General</option>
+                <option value="Tester">Tester</option>
                 <option value="Admin">Admin</option>
               </Form.Select>
             </Form.Group>
@@ -135,9 +135,6 @@ const Register = () => {
               Register
             </Button>
           </Form>
-          <div className="text-center mt-3">
-            Already have an account? <Link to="/signin">Sign In</Link>
-          </div>
         </Col>
       </Row>
     </Container>

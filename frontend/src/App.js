@@ -10,6 +10,9 @@ import Register from "./Components/Register";
 import ProtectedRoute from "./Components/RouterProtector";
 import RoleProtectedRoute from "./Components/RouterProtector/roleProtector";
 import NotFound from "./Components/RouterProtector/404";
+import UpdateAsset from "./Components/UpdateAsset";
+import UserList from "./Components/UserList";
+import UserProfile from "./Components/UserProfile";
 
 const isAdminAuthenticated = () => {
   const userPosition = JSON.parse(localStorage.getItem("LoginUserPosition"));
@@ -23,7 +26,16 @@ function App() {
       <React.Fragment>
         <Routes>
           <Route path="/signIn" element={<SignIn />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute>
+                <RoleProtectedRoute>
+                  <Register />
+                </RoleProtectedRoute>
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/"
             element={
@@ -52,9 +64,35 @@ function App() {
             path="/details"
             element={
               <ProtectedRoute>
+                <Details />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/updateAsset/:id"
+            element={
+              <ProtectedRoute>
                 <RoleProtectedRoute>
-                  <Details />
+                  <UpdateAsset />
                 </RoleProtectedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/userList"
+            element={
+              <ProtectedRoute>
+                <RoleProtectedRoute>
+                  <UserList />
+                </RoleProtectedRoute>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <UserProfile />
               </ProtectedRoute>
             }
           />

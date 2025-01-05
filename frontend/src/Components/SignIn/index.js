@@ -23,6 +23,8 @@ const SignIn = () => {
 
       // Store token or user data
       localStorage.setItem("LoginUserID", response.data.user.employeeId);
+      localStorage.setItem("mongoID", response.data.user._id);
+      localStorage.setItem("username", response.data.user.name);
       localStorage.setItem("LoginUserPosition", response.data.user.position);
       localStorage.setItem("IsLogin", "true");
 
@@ -71,7 +73,7 @@ const SignIn = () => {
             </Button>
           </Form>
           <div className="text-center mt-3">
-            Don't have an account? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/register">Contact Administrator</Link>
           </div>
         </Col>
       </Row>

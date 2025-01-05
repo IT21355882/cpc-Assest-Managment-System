@@ -16,6 +16,10 @@ function Details() {
     fetchHandler().then((data) => setAssets(data.asset || []));
   }, []);
 
+  const handleDelete = (id) => {
+    setAssets((prevAssets) => prevAssets.filter((asset) => asset._id !== id));
+  };
+
   // Filter assets based on search query
   const filteredAssets = assets.filter((asset) =>
     // asset.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -26,7 +30,7 @@ function Details() {
     <>
       <Nav />
       <Container className="mt-4">
-        <h1 className="text-center mb-4">Assets Details</h1>
+        <h1 className="text-center mb-4">Broken Assets List</h1>
 
         {/* Search Bar */}
         <InputGroup className="mb-4">
@@ -43,7 +47,7 @@ function Details() {
           {filteredAssets.length > 0 ? (
             filteredAssets.map((asset, index) => (
               <Col key={index} md={4} sm={6} xs={12} className="mb-4">
-                <Asset asset={asset} />
+                <Asset asset={asset} onDelete={handleDelete}/>
               </Col>
             ))
           ) : (

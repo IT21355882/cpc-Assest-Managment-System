@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
 function Asset(props) {
-  console.log(props);
   const {
     _id,
     name,
@@ -23,12 +22,21 @@ function Asset(props) {
 
   const navigate = useNavigate();
 
+  // Delete Handler
   const deleteHandler = async () => {
-    await axios
-      .delete(`http://localhost:5000/asset/${_id}`)
-      .then((res) => res.data)
-      .then(() => navigate("/"))
-      .then(() => navigate("/details"));
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete the asset..? This action cannot be undone.`
+    );
+    if (!confirmDelete) return; // Exit if the user cancels the action
+
+    try {
+      await axios.delete(`http://localhost:5000/asset/deleteAsset/${_id}`);
+      alert("Asset deleted successfully!");
+      props.onDelete(_id); // Notify parent component to update state
+    } catch (error) {
+      console.error("Error deleting asset:", error);
+      alert("Failed to delete asset.");
+    }
   };
 
   return (
@@ -47,14 +55,16 @@ function Asset(props) {
           <strong>Asset Number:</strong> {AssetNumber} <br />
           <strong>Error:</strong> {Error}
         </Card.Text>
+        {localStorage.getItem("LoginUserPosition") === "Admin" && (
         <div className="d-flex justify-content-between mt-3">
-          <Link to={`/details/${_id}`} className="btn btn-outline-primary">
+          <Link to={`/updateAsset/${_id}`} className="btn btn-outline-primary">
             Update
           </Link>
           <Button variant="outline-danger" onClick={deleteHandler}>
             Delete
           </Button>
         </div>
+        )}
       </Card.Body>
     </Card>
   );
