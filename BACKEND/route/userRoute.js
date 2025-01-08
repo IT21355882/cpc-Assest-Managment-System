@@ -117,4 +117,23 @@ router.get("/:id", async (req, res, next) => {
     return res.status(200).json({user});
 });
 
+
+router.get("/epfNo/:id", async (req, res, next) => {
+  const id = req.params.id;
+
+  let user;
+
+  try {
+      user = await User.findOne({employeeId: id});
+  }catch (err) {
+      console.log(err);
+  }
+
+  if (!user) {
+      return res.status(404).json({message: "Not found"});
+  }
+
+  return res.status(200).json({user});
+});
+
 module.exports = router;

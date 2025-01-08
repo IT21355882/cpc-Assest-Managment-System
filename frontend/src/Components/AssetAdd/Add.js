@@ -18,6 +18,24 @@ function Add() {
   const [AssetNumber, setAssetNumber] = useState("");
   const [Error, setError] = useState("");
 
+
+  const handleEPFBlur = async () => {
+    if (EPF) {
+      try {
+        const response = await axios.get(`http://localhost:5000/user/epfNo/${EPF}`);
+        if (response.data && response.data.user.name) {
+          setName(response.data.user.name);
+        } else {
+          setName("");
+          alert("Name not found for the provided EPF number.");
+        }
+      } catch (error) {
+        console.error("Error fetching name:", error);
+        alert("Error fetching name. Please try again.");
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -67,6 +85,7 @@ function Add() {
                   type="number"
                   value={EPF}
                   onChange={(e) => setEPF(e.target.value)}
+                  onBlur={handleEPFBlur}
                   required
                 />
               </Form.Group>

@@ -61,10 +61,10 @@ const Register = () => {
           {success && <Alert variant="success">{success}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formEmployeeID">
-              <Form.Label>Employee ID</Form.Label>
+              <Form.Label>EPF No</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter Employee ID"
+                type="Number"
+                placeholder="Enter EPF No"
                 value={employeeId}
                 onChange={(e) => setEmployeeId(e.target.value)}
                 required
